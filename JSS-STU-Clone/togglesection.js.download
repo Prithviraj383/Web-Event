@@ -1,0 +1,94 @@
+
+
+
+
+// make buttons active class
+let sideMenuButtons = document.querySelectorAll("#sideMenuButtons li button");
+let ulList = document.querySelectorAll("#sideMenuButtons ul");
+let allHeights = [];
+ulList.forEach((ul) => {
+  allHeights.push(ul.offsetHeight);
+});
+
+for (let i = 0; i < sideMenuButtons.length; i++) {
+  if (sideMenuButtons[i].classList.contains("active")) {
+    ulList.forEach((ul) => {
+      if (ul !== sideMenuButtons[i].parentNode.nextElementSibling) {
+        ul.style.height = 0;
+      } else {
+        ul.style.height = `${allHeights[i]}px`;
+      }
+    });
+  }
+  sideMenuButtons[i].addEventListener("click", (_) => {
+    sideMenuButtons.forEach((sideMenuButton) => {
+      sideMenuButton.classList.remove("active");
+    });
+    ulList.forEach((ul) => {
+      if (ul !== sideMenuButtons[i].parentNode.nextElementSibling) {
+        ul.style.height = 0;
+      } else {
+        ul.style.height = `${allHeights[i]}px`;
+      }
+    });
+    sideMenuButtons[i].classList.add("active");
+  });
+}
+
+
+function selectedHighlight(evt) {
+  var i, tablinks;
+  tablinks = document.getElementsByClassName("navlink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  evt.currentTarget.className += " activeselected";
+}
+
+function togglearchive(evt) { 
+  var i, tablinks;
+  tablinks = document.getElementsByClassName("navsublink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  evt.currentTarget.className += " activeselected";
+}
+
+function togglesublink(evt, sectionID) { 
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("bsingle__content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("navsublink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(sectionID).style.display = "block";
+  evt.currentTarget.className += " activeselected";
+}
+
+function toggle(evt, sectionID) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("bsingle__content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tag-cloud-link");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(sectionID).style.display = "block";
+  evt.currentTarget.className += " activeselected";
+}
+
+
+function toggle_subject(evt, sectionID) {
+  var i, tablinks;
+  tablinks = document.getElementsByClassName("tag-cloud-link");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(sectionID).style.display = "block";
+  evt.currentTarget.className += " activeselected";
+}
